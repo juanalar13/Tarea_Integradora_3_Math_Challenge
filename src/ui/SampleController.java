@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ public class SampleController {
 	
 	@FXML
     private Button ButtonJugar;
+	
+	
     
     @FXML
     private TextField TextUsuario;
@@ -49,7 +52,7 @@ public class SampleController {
 			controladorjuego.LabelB.setText(p.opcionB);
 			controladorjuego.LabelC.setText(p.opcionC);
 			controladorjuego.LabelD.setText(p.opcionD);
-			controladorjuego.respuesta = p.respuesta;
+			controladorjuego.respuesta = p.respuesta;			
 
 			
 			
@@ -58,7 +61,37 @@ public class SampleController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Math Challenge");
-            stage.show();           
+            stage.show(); 
+            
+            
+            Thread taskThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                  double progress = 0;
+                  for(int i=0; i<10; i++){
+
+                    try {
+                      Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                      e.printStackTrace();
+                    }
+
+                    progress += 0.1;
+                    final double reportedProgress = progress;
+
+                    Platform.runLater(new Runnable() {
+                      @Override
+                      public void run() {
+                    	  controladorjuego.BarProgressTiempo.setProgress(reportedProgress);
+                      }
+                    });
+                  }
+                }
+              });
+
+              taskThread.start();
+            
+            
             
             
             // Hide this current window (if this is what you want)

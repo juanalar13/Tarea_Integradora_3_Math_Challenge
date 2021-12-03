@@ -21,10 +21,7 @@ public class Main extends Application {
 	
 	public Main() {
 		controller = new SampleController();
-	}
-	
-	
-	
+	}	
 	
 	
 	
