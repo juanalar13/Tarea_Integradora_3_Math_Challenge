@@ -1,0 +1,87 @@
+package ui;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+
+public class ControladorJuego {
+	
+	String respuesta = "";
+	
+	@FXML
+    Label LabelPuntaje;
+	
+	@FXML
+    Label LabelPregunta;
+	
+	@FXML
+    Label LabelA;
+	
+	@FXML
+    Label LabelB;
+	
+	@FXML
+    Label LabelC;
+	
+	@FXML
+    Label LabelD;
+    
+    @FXML
+    private Button BontonA;
+    
+    @FXML
+    private Button BontonB;
+    
+    @FXML
+    private Button BontonC;
+    
+    @FXML
+    private Button BontonD;
+    
+    void testRespuesta(String r) {
+    	if (respuesta.equals(r)) {
+    		Main.jugador.incPuntaje(10);
+    	}else {
+    		Main.jugador.incPuntaje(-10);
+    	}
+    	Main.pregunta.GenerarPregunta();
+    	LabelPuntaje.setText("Puntaje = " + Main.jugador.puntaje);
+		LabelPregunta.setText(Main.pregunta.pregunta);
+		respuesta = Main.pregunta.respuesta;
+		LabelA.setText(Main.pregunta.opcionA);
+		LabelB.setText(Main.pregunta.opcionB);
+		LabelC.setText(Main.pregunta.opcionC);
+		LabelD.setText(Main.pregunta.opcionD);
+		
+    }
+    
+    
+    @FXML
+    public void OnButonA(ActionEvent event) {    	
+    	testRespuesta("A");
+    }
+    
+    @FXML
+    public void OnButonB(ActionEvent event) {
+    	testRespuesta("B");
+
+    }
+    
+    @FXML
+    public void OnButonC(ActionEvent event) {
+    	testRespuesta("C");
+
+    }
+    
+    @FXML
+    public void OnButonD(ActionEvent event) {
+    	testRespuesta("D");
+
+    }
+ 
+    
+	
+
+}
