@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="28.0" prefHeight="17.0" prefWidth="334.0" text="TOP 5" textAlignment="CENTER" />
+      <Label fx:id="LabelTop" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="51.0" prefHeight="134.0" prefWidth="346.0" text="Jugador1&#10;Jugador2&#10;Jugador3&#10;Jugador4&#10;Jugador5&#10;&#10;Tu posicion" textAlignment="CENTER" wrapText="true" />
+      <Label alignment="CENTER" layoutX="151.0" layoutY="200.0" prefHeight="17.0" prefWidth="62.0" text="Jugador" />
+      <TextField fx:id="TextJugador" layoutX="116.0" layoutY="225.0" prefHeight="25.0" prefWidth="140.0" />
+      <Button fx:id="BotonBuscar" layoutX="151.0" layoutY="262.0" mnemonicParsing="false" onAction="#OnBotonBuscar" prefHeight="25.0" prefWidth="62.0" text="Buscar" />
+      <Label fx:id="LabelResultado" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="301.0" prefHeight="17.0" prefWidth="346.0" text="Resultado" textAlignment="CENTER" />
+      <Button fx:id="BotonEliminar" layoutX="132.0" layoutY="356.0" mnemonicParsing="false" onAction="#OnBotonEliminar" text="Eliminar registro" />
+      <Button fx:id="BotonReiniciar" layoutX="134.0" layoutY="419.0" mnemonicParsing="false" onAction="#OnBotonReiniciar" text="Reiniciar Juego" />
+   </children>
+</AnchorPane>
