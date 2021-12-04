@@ -1,7 +1,7 @@
 package model;
 import java.io.Serializable;
 
-
+// Nodo para el Arbol de Jugadores
 public class Jugador implements Serializable, Comparable<Jugador> {
 	
 	

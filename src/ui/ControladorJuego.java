@@ -2,7 +2,6 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -14,6 +13,9 @@ public class ControladorJuego {
 	
 	@FXML
 	ProgressBar BarProgressTiempo;
+	
+	@FXML
+    Label LabelJugador;
 	
 	@FXML
     Label LabelPuntaje;
@@ -48,9 +50,7 @@ public class ControladorJuego {
     @FXML
     Label LabelTiempo;
     
-    
-    public Scene scene;
-    
+        
     
     void testRespuesta(String r) {
     	if (respuesta.equals(r)) {

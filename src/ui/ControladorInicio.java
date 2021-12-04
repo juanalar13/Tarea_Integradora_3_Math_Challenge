@@ -21,7 +21,7 @@ public class ControladorInicio {
 	
     
     @FXML
-    private TextField TextUsuario;
+    private TextField TextJugador;
     
     ControladorJuego controladorjuego;
     ControladorFinal controladorfinal;
@@ -36,7 +36,9 @@ public class ControladorInicio {
     public void AbrirVentanaFinal() {
     	try {
     		
-    		 System.out.print("vea");
+    		Main.GuardarJugadores();    		
+    		
+    		// creando y abriendo la ventana Final
     		 FXMLLoader fxml2 = new FXMLLoader(getClass().getResource("final.fxml"));
     		 fxml2.setController(controladorfinal);    		
     		 Parent root = fxml2.load();    		
@@ -44,7 +46,15 @@ public class ControladorInicio {
     		 Scene scene2 = new Scene(root);
     		 stage2.setScene(scene2);
     		 stage2.setTitle("Math Challenge");
-    		 stage2.show();      
+    		 stage2.show();
+    		 
+    		 controladorfinal.stagefinal = stage2; // asignando el Stage, utilidad: para cerrar la ventana Final
+    		 
+    		 controladorfinal.LabelTop.setText(Main.jugadores.top5());
+    		 controladorfinal.LabelResultado.setText(Main.jugadores.BuscarPosicion(Main.jugador.nombre));
+    		 
+    		 
+    		 
     	}catch (Exception e) {
 
     	} 
@@ -60,10 +70,7 @@ public class ControladorInicio {
 			
 			FXMLLoader fxmll = new FXMLLoader(getClass().getResource("juego.fxml"));			
 			fxmll.setController(controladorjuego);			
-			Parent root = fxmll.load();
-			
-			//System.out.print("vea");
-			
+			Parent root = fxmll.load();	
 			
 			
 			Pregunta p = new Pregunta();
@@ -79,21 +86,18 @@ public class ControladorInicio {
 			controladorjuego.respuesta = p.respuesta;	
 			
 			
-            Stage stage = new Stage();
-            
+            Stage stageJuego = new Stage();            
             Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Math Challenge");
-            stage.show();
-            
-            //controladorjuego.scene = scene;
+            stageJuego.setScene(scene);
+            stageJuego.setTitle("Math Challenge");
+            stageJuego.show();            
             
             
             Thread taskThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                   double progress = 1.0;
-                  for(int i=0; i<10; i++){
+                  for(int i=0; i<100; i++){
 
                     try {
                       Thread.sleep(100);
@@ -101,7 +105,7 @@ public class ControladorInicio {
                       e.printStackTrace();
                     }                   
                     
-                    progress = (i != 9)? progress - 0.01: 0;
+                    progress = (i != 99)? progress - 0.01: 0;
                     
                     final double reportedProgress = progress;
 
@@ -109,33 +113,31 @@ public class ControladorInicio {
                       @Override
                       public void run() {
                     	  controladorjuego.BarProgressTiempo.setProgress(reportedProgress);
-                    	  controladorjuego.LabelTiempo.setText("Tiempo restante = " + String.format("%.1f", reportedProgress * 1.0));
+                    	  controladorjuego.LabelTiempo.setText("Tiempo restante = " + String.format("%.1f", reportedProgress * 10) + " seg");
                     	  
                     	  if(reportedProgress == 0) {
                 			  AbrirVentanaFinal();
-                			  stage.close();//scene.getWindow().hide();
+                			  stageJuego.close();
                 		  } 
                     	  
                       }
                     });
-                  }
-                  
-                 
+                  }     
                   
                   
                   
                 }
               });
 
-              taskThread.start();          
-            
-            
+            taskThread.start();            
             //((Node)(event.getSource())).getScene().getWindow().hide(); // escondiendo la ventana
-              
-              Stage stage2 = (Stage) ((Node)(event.getSource())).getScene().getWindow();
-              stage2.close();
+            
+            // cerrando ventana de Inicio
+            Stage stageInicio = (Stage) ((Node)(event.getSource())).getScene().getWindow();
+            stageInicio.close();
 			
-			TextUsuario.setText("Carlos");	
+			Main.jugador = Main.jugadores.insertar(TextJugador.getText());
+			controladorjuego.LabelJugador.setText("Jugador = " + Main.jugador.nombre);
 			
 		}catch (Exception e) {
 		    			

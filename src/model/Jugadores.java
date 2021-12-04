@@ -1,15 +1,21 @@
+
 package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
+
+// Clase para el Arbol de los Jugadores
 public class Jugadores implements Serializable{	
 
 
-	private static final long serialVersionUID = -6258461972369375109L;
+	private static final long serialVersionUID = -6258461972369375109L;	
 	
-	Jugador raiz;
+	public Jugador raiz;
+	
+	public Jugadores() {
+		raiz = null;
+	}
 	
 	public Jugador insertar(String nombre) {
 		if(raiz == null) {
@@ -110,18 +116,48 @@ public class Jugadores implements Serializable{
 		ListarInorden(list, raiz);
 	}
 	
-	public String StringTop5() {
+	public String top5() {
 		ArrayList<Jugador> list = new ArrayList<Jugador>();
 		ListarInorden(list);
 		list.sort(null);
 		int n = list.size() < 5? list.size(): 5;
-		String s = "";
+		String s = "TOP 5\n";
 		for(int i=0; i<n; i++) {
 			s += list.get(i).nombre + "(" + list.get(i).puntaje + ")\n";
 		}
 		s += "\n";
 		return s;		
 	}
+	
+	
+	public String BuscarPosicion(String s) {
+		Jugador buscado = buscar(s);
+		ArrayList<Jugador> list = new ArrayList<Jugador>();
+		ListarInorden(list);
+		list.sort(null);
+		try {
+			return "Jugador: " + s + " - Puntaje: " + buscado.puntaje + " - Posicion: " +  (list.indexOf(buscado) + 1);
+		}catch (Exception e) {
+			return "No se encontro el jugador";
+		}				
+	}
+	
+	
+	
+	public void eliminar(Jugador g) {
+		ArrayList<Jugador> list = new ArrayList<Jugador>();
+		ListarInorden(list);
+		list.remove(g);
+		raiz = null;
+		for (int i = 0; i<list.size(); i++) {
+			Jugador j = new Jugador(list.get(i).nombre, list.get(i).puntaje);
+			insertar(j);
+		}		
+	}
+	
+	
+	
+	
 	
 	
 	

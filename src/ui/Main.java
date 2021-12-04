@@ -1,3 +1,6 @@
+// Autor: Juan felipe alarcon
+
+
 package ui;
 
 import java.io.FileInputStream;
@@ -17,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 	
-	ControladorInicio controllerinicio;
+	public static ControladorInicio controllerinicio;
 	
 	public static Jugador jugador;
 	public static Pregunta pregunta;
@@ -27,7 +30,20 @@ public class Main extends Application {
 	
 	public Main() {
 		controllerinicio = new ControladorInicio();
-	}	
+	}
+	
+	
+	public static void GuardarJugadores() {
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream("data/jugadores.bytecode");
+		    ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);		     
+		    objectOutputStream.writeObject(jugadores);
+		    objectOutputStream.close();
+		}catch(Exception e) {
+			System.out.println("Guardado no exitoso");
+		}
+	}
+	
 	
 	
 	
@@ -52,9 +68,9 @@ public class Main extends Application {
 		pregunta = new Pregunta();		
 		
 		/*
-		 * Guardado Inicial
-		 * 
-		 * 
+		
+		 // Guardado Inicial 
+ 
 		jugadores = new Jugadores();
 		
 		Jugador j1 = new Jugador("delta", 30);
@@ -62,10 +78,18 @@ public class Main extends Application {
 		Jugador j3 = new Jugador("alfa", 40);
 		Jugador j4 = new Jugador("gamma", 20);
 		
+		//Jugador j1 = new Jugador("alfa", 30);
+		//Jugador j2 = new Jugador("beta", 10);
+		//Jugador j3 = new Jugador("delta", 40);
+		//Jugador j4 = new Jugador("gamma", 20);
+		
 		jugadores.insertar(j1);
 		jugadores.insertar(j2);
 		jugadores.insertar(j3);
 		jugadores.insertar(j4);
+		
+		//jugadores.inorden();
+		
 		
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream("data/jugadores.bytecode");
@@ -93,7 +117,7 @@ public class Main extends Application {
 		
 		
 		
-		System.out.println(jugadores.StringTop5());
+		System.out.println(jugadores.top5());
 		
 		
 		
